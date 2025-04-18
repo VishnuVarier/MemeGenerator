@@ -11,15 +11,19 @@
                 <input type="text" placeholder="Enter Caption" id="text">
                 <input type="number" placeholder="X cordinate" id="XCord">
                 <input type="number" placeholder="Y cordinate" id="YCord"><br>
+                <input type="number" placeholder="Font Size" id="size" style="margin-left:200px;width:120px;">
+                <select id="color">
+                    <option value="black">Black Text</option>
+                    <option value="white">White Text</option>
+                </select>
             </div>
             <div id="captions">
             </div>
 
         </div>
         <div class="util">
-            <button class="add" id="add" onclick="addCaption()">Add Caption</button>
-            <button class="add" id="rem" onclick="removeCaption()">Remove Caption</button>
-            <button class="generate" onclick="generateMeme()">Generate!</button>
+            <button class="add" id="add" onclick="addCaption()">ADD CAPTION</button>
+            <button class="add" id="rem" onclick="removeCaption()">REMOVE CAPTION</button>
         </div>
     </body>
         <script>
@@ -28,8 +32,7 @@
             if (imageSrc) {
                 document.getElementById("memeImage").src = imageSrc;
             }
-            
-            var num = 0;
+
             function addCaption() {
                 const container = document.getElementById("captions");
                 const caption = document.createElement("div");
@@ -39,13 +42,21 @@
                 const YValue = document.getElementById("YCord").value;
                 
                 caption.className="caption";
-                caption.id = `caption${num}`;
                 caption.innerHTML = text;
                 caption.style.left = `${XValue}px`;
                 caption.style.top = `${YValue}px`;
+                caption.style.fontSize = document.getElementById("size").value
+                caption.style.color = document.getElementById("color").value
                 
                 container.appendChild(caption)
-                num +=1;
+            }
+
+            function updateText(){
+                console.log(document.getElementById("size"));
+                console.log(document.getElementById("color").value)
+
+                document.documentElement.style.setProperty("font-size",document.getElementById("size"));
+                document.documentElement.style.setProperty("color",document.getElementById("color").value);
             }
 
             function removeCaption() {

@@ -1,0 +1,141 @@
+:root{
+    --dark: #102E50;
+    --accent: #F5C45E;
+    --prim: #E78B48;
+    --sec: #BE3D2A;
+}
+
+body{
+    background: radial-gradient(circle, #E78B48 0%, #e38f53 25%, #df9460 50%, #db9967 75%, #d07330 100%);
+    
+}
+
+h1{
+    font-size: 60px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 25px;
+    margin-right: 450px;
+    margin-left:  450px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: var(--accent);
+    background:  #102E50cc;
+    border-radius: 30px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+/*     
+    animation: colorShiftHeading 1s infinite linear */
+}
+
+img{
+    width: 20%;
+    height: auto;
+    margin-left: 200px;
+}
+
+.util{
+    margin-left: 800px;
+}
+
+.cont {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+}
+
+.caption{
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 15px;
+    font-family: Impact, sans-serif;
+    text-shadow: 2px 2px 4px #000;
+}
+
+input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    margin-left: 150px;
+    
+    margin-top:20px;
+    margin-bottom:20px;
+
+    font-size: 16px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 200;
+    letter-spacing: 2px;
+
+    border: 2px solid var(--sec);
+    border-radius: 4px;
+}
+
+input[type="text"]::placeholder{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #969696;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.8
+}
+
+input[type="number"] {
+    width: 90px;
+    padding: 10px;
+    margin-left: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 200;
+    letter-spacing: 2px;
+
+    border: 2px solid var(--sec);
+    border-radius: 4px;
+}
+
+input[type="number"]::placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #969696;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.generate{
+    margin-left: 10px;
+
+    font-size: 20px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 1px;
+    padding: 10px;
+    color: var(--accent);
+    background-color: var(--sec) ;
+    border: 2px solid var(--dark);  
+    border-radius: 30px;
+    transition: all 0.2s ease-in-out;
+}
+
+.generate:hover{
+    color: var(--dark);
+    background-color:var(--accent);
+    transform: scale(1.1);
+    border:  5px solid var(--dark);
+}
+
+.add {
+    font-size: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 500;
+    padding: 10px;
+    color: var(--accent);
+    background-color: var(--prim);
+    border-radius: 30px;
+    transition: all 0.2s ease-in-out;
+}
+
+.add:hover {
+    color: var(--dark);
+    background-color: var(--accent);
+}

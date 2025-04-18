@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="Generator.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+    <body>
+        <h1>Meme Generator</h1>
+        <div class="cont">
+            <img id="memeImage" src="" >
+            <div id="cont">
+                <input type="text" placeholder="Enter Caption" id="caption1">
+                <input type="number" placeholder="X cordinate" id="X1">
+                <input type="number" placeholder="Y cordinate" id="Y1"><br>
+            </div>
+
+            <div class="caption" id="caption"></div> 
+
+        </div>
+        <div class="util">
+            <button class="add" id="add" onclick="addTextBox()">Add Caption</button>
+            <button class="add" id="rem" onclick="removeTextBox()">Remove Caption</button>
+            <button class="generate" onclick="generateMeme()">Generate!</button>
+        </div>
+    </body>
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const imageSrc = params.get("img");
+            if (imageSrc) {
+                document.getElementById("memeImage").src = imageSrc;
+            }
+            
+            var num = 2
+            function addTextBox() {
+                const container = document.getElementById("cont");
+                const newInput = document.createElement("input");
+                const newXCord = document.createElement("input");
+                const newYCord = document.createElement("input");
+
+                newInput.type = "text";
+                newInput.id = "caption"+num;
+                newInput.placeholder = "Enter Caption";
+
+                newXCord.type = "number";
+                newXCord.placeholder = "X Cord";
+                newXCord.id = "X"+num;
+
+                newYCord.type = "number";
+                newYCord.placeholder = "Y Cord";
+                newYCord.id = "Y"+num;
+
+                container.appendChild(newInput);
+                container.appendChild(newXCord);
+                container.appendChild(newYCord);
+                document.getElementById("cont").innerHTML += "<br>"
+                num +=1;
+            }
+
+            function removeTextBox() {
+                const container = document.getElementById("cont");
+                const inputs = container.getElementsByTagName("input");
+
+                if (inputs.length > 3) {
+                    for (let i = 0; i < 3; i++) {
+                        container.removeChild(inputs[inputs.length - 1]);
+                    }
+                }
+            }
+            
+            function generateMeme(){
+                const container = document.getElementById("cont");
+                const newDiv = document.createElement("div");
+                newDiv.className = "caption";
+                
+                container.append(newDiv);
+
+                newDiv.innerHTML = document.getElementById(`caption${num-1}`).value
+
+            }
+        </script>
+</html>

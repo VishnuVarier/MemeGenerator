@@ -8,18 +8,22 @@
         <div class="cont">
             <img id="memeImage" src="" >
             <div id="cont">
-                <input type="text" placeholder="Enter Caption" id="caption1">
-                <input type="number" placeholder="X cordinate" id="X1">
-                <input type="number" placeholder="Y cordinate" id="Y1"><br>
+                <input type="text" placeholder="Enter Caption" id="text">
+                <input type="number" placeholder="X cordinate" id="XCord">
+                <input type="number" placeholder="Y cordinate" id="YCord"><br>
+                <input type="number" placeholder="Font Size" id="size" style="margin-left:200px;width:120px;">
+                <select id="color">
+                    <option value="black">Black Text</option>
+                    <option value="white">White Text</option>
+                </select>
             </div>
-
-            <div class="caption" id="caption"></div> 
+            <div id="captions">
+            </div>
 
         </div>
         <div class="util">
-            <button class="add" id="add" onclick="addTextBox()">Add Caption</button>
-            <button class="add" id="rem" onclick="removeTextBox()">Remove Caption</button>
-            <button class="generate" onclick="generateMeme()">Generate!</button>
+            <button class="add" id="add" onclick="addCaption()">ADD CAPTION</button>
+            <button class="add" id="rem" onclick="removeCaption()">REMOVE CAPTION</button>
         </div>
     </body>
         <script>
@@ -28,53 +32,41 @@
             if (imageSrc) {
                 document.getElementById("memeImage").src = imageSrc;
             }
-            
-            var num = 2
-            function addTextBox() {
-                const container = document.getElementById("cont");
-                const newInput = document.createElement("input");
-                const newXCord = document.createElement("input");
-                const newYCord = document.createElement("input");
 
-                newInput.type = "text";
-                newInput.id = "caption"+num;
-                newInput.placeholder = "Enter Caption";
-
-                newXCord.type = "number";
-                newXCord.placeholder = "X Cord";
-                newXCord.id = "X"+num;
-
-                newYCord.type = "number";
-                newYCord.placeholder = "Y Cord";
-                newYCord.id = "Y"+num;
-
-                container.appendChild(newInput);
-                container.appendChild(newXCord);
-                container.appendChild(newYCord);
-                document.getElementById("cont").innerHTML += "<br>"
-                num +=1;
+            function addCaption() {
+                const container = document.getElementById("captions");
+                const caption = document.createElement("div");
+                
+                const text = document.getElementById("text").value;
+                const XValue = document.getElementById("XCord").value;
+                const YValue = document.getElementById("YCord").value;
+                
+                caption.className="caption";
+                caption.innerHTML = text;
+                caption.style.left = `${XValue}px`;
+                caption.style.top = `${YValue}px`;
+                caption.style.fontSize = document.getElementById("size").value
+                caption.style.color = document.getElementById("color").value
+                
+                container.appendChild(caption)
             }
 
-            function removeTextBox() {
-                const container = document.getElementById("cont");
-                const inputs = container.getElementsByTagName("input");
+            function updateText(){
+                console.log(document.getElementById("size"));
+                console.log(document.getElementById("color").value)
 
-                if (inputs.length > 3) {
-                    for (let i = 0; i < 3; i++) {
-                        container.removeChild(inputs[inputs.length - 1]);
-                    }
+                document.documentElement.style.setProperty("font-size",document.getElementById("size"));
+                document.documentElement.style.setProperty("color",document.getElementById("color").value);
+            }
+
+            function removeCaption() {
+                const container = document.getElementById("captions");
+                const captions = container.getElementsByTagName("div");
+
+                if (captions.length > 0) {
+                    container.removeChild(captions[captions.length - 1]);
                 }
             }
             
-            function generateMeme(){
-                const container = document.getElementById("cont");
-                const newDiv = document.createElement("div");
-                newDiv.className = "caption";
-                
-                container.append(newDiv);
-
-                newDiv.innerHTML = document.getElementById(`caption${num-1}`).value
-
-            }
         </script>
 </html>

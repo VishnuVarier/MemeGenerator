@@ -1,7 +1,6 @@
 <html>
     <head>
         <link rel="stylesheet" href="Generator.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     </head>
     <body>
         <h1>Meme Generator</h1>
@@ -11,15 +10,18 @@
                 <input type="text" placeholder="Enter Caption" id="text">
                 <input type="number" placeholder="X cordinate" id="XCord">
                 <input type="number" placeholder="Y cordinate" id="YCord"><br>
-                <input type="number" placeholder="Font Size" id="size" style="margin-left:200px;width:120px;">
+                <label id="labelCaption">Caption</label>
+                <label id="labelXCord">XCord</label>
+                <label id="labelYCord">YCord</label><br>
+                <input type="number" value="15" placeholder="Font Size" id="size" style="margin-left:200px;width:120px;">
                 <select id="color">
                     <option value="black">Black Text</option>
                     <option value="white">White Text</option>
-                </select>
+                </select><br>
+                <label id="labelFontsize">Font Size</label>
+                <label id="labelTextcolor">Text Color</label>
             </div>
-            <div id="captions">
-            </div>
-
+            <div id="captions"></div>
         </div>
         <div class="util">
             <button class="add" id="add" onclick="addCaption()">ADD CAPTION</button>
@@ -43,8 +45,8 @@
                 
                 caption.className="caption";
                 caption.innerHTML = text;
-                caption.style.left = `${XValue}px`;
-                caption.style.top = `${YValue}px`;
+                caption.style.left = `${XValue+10}px`;
+                caption.style.top = `${YValue+10}px`;
                 caption.style.fontSize = document.getElementById("size").value
                 caption.style.color = document.getElementById("color").value
                 

@@ -1,74 +1,124 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="Generator.css">
-    </head>
-    <body>
-        <h1>Meme Generator</h1>
-        <div class="cont">
-            <img id="memeImage" src="" >
-            <div id="cont">
-                <input type="text" placeholder="Enter Caption" id="text">
-                <input type="number" placeholder="X cordinate" id="XCord">
-                <input type="number" placeholder="Y cordinate" id="YCord"><br>
-                <label id="labelCaption">Caption</label>
-                <label id="labelXCord">XCord</label>
-                <label id="labelYCord">YCord</label><br>
-                <input type="number" value="15" placeholder="Font Size" id="size" style="margin-left:200px;width:120px;">
-                <select id="color">
-                    <option value="black">Black Text</option>
-                    <option value="white">White Text</option>
-                </select><br>
-                <label id="labelFontsize">Font Size</label>
-                <label id="labelTextcolor">Text Color</label>
-            </div>
-            <div id="captions"></div>
+
+<head>
+    <title>Generate Meme</title>
+    <link rel="stylesheet" href="Generator.css">
+</head>
+
+<body>
+    <h1>Meme Generator</h1>
+    <div class="cont">
+        <img id="memeImage" src="">
+        <div id="cont">
+            <label id="labelAbout">Add a caption and drag it around to make a meme!</label><br>
+            <input type="text" placeholder="Enter Caption" id="text">
+            <input type="number" value="15" placeholder="Font Size" id="size" style="margin-left:20px;width:120px;">
+            <select id="color">
+                <option value="black">Black Text</option>
+                <option value="white">White Text</option>
+            </select><br>
+            <label id="labelCaption">Caption</label>
+            <label id="labelFontsize">Font Size</label>
+            <label id="labelTextcolor">Text Color</label>
         </div>
-        <div class="util">
-            <button class="add" id="add" onclick="addCaption()">ADD CAPTION</button>
-            <button class="add" id="rem" onclick="removeCaption()">REMOVE CAPTION</button>
-        </div>
-    </body>
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const imageSrc = params.get("img");
-            if (imageSrc) {
-                document.getElementById("memeImage").src = imageSrc;
-            }
+        <div id="captions"></div>
+    </div>
+    <div class="util">
+        <button class="add" id="add" onclick="addCaption()">ADD CAPTION</button>
+        <button class="add" id="rem" onclick="removeCaption()">REMOVE CAPTION</button>
+    </div>
+</body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const imageSrc = params.get("img");
+    if (imageSrc) {
+        document.getElementById("memeImage").src = imageSrc;
+    }
+    var captionID = 0;
 
-            function addCaption() {
-                const container = document.getElementById("captions");
-                const caption = document.createElement("div");
-                
-                const text = document.getElementById("text").value;
-                const XValue = document.getElementById("XCord").value;
-                const YValue = document.getElementById("YCord").value;
-                
-                caption.className="caption";
-                caption.innerHTML = text;
-                caption.style.left = `${XValue+10}px`;
-                caption.style.top = `${YValue+10}px`;
-                caption.style.fontSize = document.getElementById("size").value
-                caption.style.color = document.getElementById("color").value
-                
-                container.appendChild(caption)
-            }
 
-            function updateText(){
-                console.log(document.getElementById("size"));
-                console.log(document.getElementById("color").value)
+    function addCaption() {
+        captionID += 1;
 
-                document.documentElement.style.setProperty("font-size",document.getElementById("size"));
-                document.documentElement.style.setProperty("color",document.getElementById("color").value);
-            }
+        const container = document.getElementById("captions");
+        const caption = document.createElement("div");
 
-            function removeCaption() {
-                const container = document.getElementById("captions");
-                const captions = container.getElementsByTagName("div");
+        const text = document.getElementById("text").value;
 
-                if (captions.length > 0) {
-                    container.removeChild(captions[captions.length - 1]);
-                }
-            }
-            
-        </script>
+        caption.id = `caption${captionID}`;
+        caption.className = "caption";
+        caption.innerHTML = text;
+        caption.style.top = "50%";
+        caption.style.left = "40%";
+        caption.style.fontSize = `${document.getElementById("size").value}px`
+        caption.style.color = document.getElementById("color").value
+
+        container.appendChild(caption)
+
+        dragElement(caption);
+    }
+
+    function updateText() {
+        console.log(document.getElementById("size"));
+        console.log(document.getElementById("color").value)
+
+        document.documentElement.style.setProperty("font-size", document.getElementById("size"));
+        document.documentElement.style.setProperty("color", document.getElementById("color").value);
+    }
+
+    function removeCaption() {
+        const container = document.getElementById("captions");
+        const captions = container.getElementsByTagName("div");
+
+        if (captions.length > 0) {
+            container.removeChild(captions[captions.length - 1]);
+            captionID -= 1;
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById(`caption${captionID}`);
+        if (el) dragElement(el);
+    });
+
+
+    function dragElement(elmnt) {
+        let startX, startY, origX, origY;
+
+        // Attach mousedown directly to the div
+        elmnt.onmousedown = dragMouseDown;
+
+        function dragMouseDown(e) {
+            e.preventDefault();
+            // record starting cursors and element positions
+            startX = e.clientX;
+            startY = e.clientY;
+            origX = elmnt.offsetLeft;
+            origY = elmnt.offsetTop;
+
+            document.onmouseup = closeDrag;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e.preventDefault();
+            // calculate how far the mouse has moved
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            // set the element’s new position
+            elmnt.style.left = (origX + dx) + 'px';
+            elmnt.style.top = (origY + dy) + 'px';
+        }
+
+        function closeDrag() {
+            // stop listening when mouse released
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+</script>
+
 </html>

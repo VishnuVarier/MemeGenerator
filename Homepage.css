@@ -1,4 +1,4 @@
-:root{
+:root {
     --dark: #102E50;
     --accent: #F5C45E;
     --prim: #E78B48;
@@ -6,14 +6,19 @@
 }
 
 @keyframes colorShiftHeading {
-    0%, 100% {
+
+    0%,
+    100% {
         color: #E78B48;
         border: 5px solid #79ec55;
     }
-    25%, 75% {
+
+    25%,
+    75% {
         color: #d324bc;
         border: 5px solid #F5C45E;
     }
+
     50% {
         color: #79ec55;
         border: 5px solid #d324bc;
@@ -21,72 +26,82 @@
 }
 
 @keyframes colorShiftButton {
-    0%, 100% {
-      color: #79ec55;
-      border: 5px solid #48c5e7;
+
+    0%,
+    100% {
+        color: #79ec55;
+        border: 5px solid #48c5e7;
     }
-    25%, 75% {
-      color: #00ffdd;
-      border: 5px solid #d324bc;
+
+    25%,
+    75% {
+        color: #00ffdd;
+        border: 5px solid #d324bc;
     }
+
     50% {
-      color: #ff00d4;
-      border: 5px solid #79ec55;
+        color: #ff00d4;
+        border: 5px solid #79ec55;
     }
 }
 
-body{
+body {
     background: radial-gradient(circle, #E78B48 0%, #e38f53 25%, #df9460 50%, #db9967 75%, #d07330 100%);
-    
+
 }
 
-h1{
+h1 {
     position: absolute;
-    left:400px;
-    bottom:400px;
+    left: 400px;
+    bottom: 400px;
 
     font-size: 100px;
     font-weight: 400;
-    
+
     padding: 40px;
-    background:  #102E50cc;
+    background: #102E50cc;
     border-radius: 30px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
     animation: colorShiftHeading 1s infinite linear
 }
 
-.soyjackR{
+img {
+    width: 525px;
+    height: 735px;
+}
+
+.soyjackR {
     position: absolute;
     top: 0px;
     left: 0px;
-    transform:scaleX(-1);
+    transform: scaleX(-1);
 }
 
-.soyjackL{
+.soyjackL {
     position: absolute;
     top: 0px;
     right: 0px;
 }
 
-.mainButton{
+.mainButton {
     position: absolute;
-    top:400px;
-    left:700px;
+    top: 400px;
+    left: 700px;
 
     font-size: 50px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 500px;
     padding: 10px;
     color: var(--accent);
-    background-color: var(--sec) ;
+    background-color: var(--sec);
     border-radius: 30px;
     animation: colorShiftButton 2s infinite ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
-.mainButton:hover{
+.mainButton:hover {
     color: var(--dark);
-    background-color:var(--accent);
+    background-color: var(--accent);
     transform: scale(1.3);
 }

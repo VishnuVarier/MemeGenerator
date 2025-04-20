@@ -1,26 +1,29 @@
 <html ng-app="MemeApp">
-    <head>
-        <link rel="stylesheet" href="HomePage.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>        
-        <script>
-            var app = angular.module('MemeApp', []);
-            app.controller('MyCtrl', function($scope) {
-                $scope.redirectToPage = function() {
-                    window.location.href = "Gallery.html";
-                };
-            });
-        </script>
-    </head>
-    <body ng-controller="MyCtrl">
-        <h1>MemeGenerator</h1>
-            <div class="soyjackR">
-                <img src=".\assets\pointingSoyjack.png" height="700px" width="525px">
-            </div>
-            <div>
-                <button ng-click="redirectToPage()" class="mainButton">Images</button>
-            </div>
-            <div class="soyjackL">
-                <img src=".\assets\pointingSoyjack.png" height="700px" width="525px">
-            </div>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="HomePage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var app = angular.module('MemeApp', []);
+        app.controller('MyCtrl', function ($scope) {
+            $scope.redirectToPage = function () {
+                window.location.href = "Gallery.html";
+            };
+        });
+    </script>
+</head>
+
+<body ng-controller="MyCtrl">
+    <h1>MemeGenerator</h1>
+    <div class="soyjackR">
+        <img src=".\assets\pointingSoyjack.png">
+    </div>
+    <div>
+        <button ng-click="redirectToPage()" class="mainButton">Images</button>
+    </div>
+    <div class="soyjackL">
+        <img src=".\assets\pointingSoyjack.png">
+    </div>
+</body>
+
 </html>
